@@ -1,3 +1,19 @@
+## 2nd Week Plan
+
+
+### Violation Detecting Function
+
+* [ ] Update the fake detection monitor for detecting violations
+* [ ] Make a function to judge whether there is violation and what kind of violation it is according to the log recorded by monitor
+* [ ] Generate a violation record according to the judgement
+
+### Fine Generating Function and Automatical Email Function
+
+* [ ] Need a automatical email funtion
+* [ ] Make a function to generate a fine according to the violation record
+* [ ] Make a function to triger the automatical email sending system
+
+
 ## 1st Week Plan
 
 ### Framework
