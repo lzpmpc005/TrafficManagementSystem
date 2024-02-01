@@ -27,11 +27,11 @@ class Vehicle(models.Model):
     def __str__(self):
         return self.numberPlate
     
-
 class JunctionsLog(models.Model):
     logID = models.AutoField(primary_key=True)
-    numberPlate = models.ForeignKey(Plate, on_delete=models.CASCADE)
+    numberPlate = models.CharField(max_length=20)
     dateTime = models.DateTimeField()
+    period = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     event = models.CharField(max_length=100)
     status = models.CharField(max_length=100)

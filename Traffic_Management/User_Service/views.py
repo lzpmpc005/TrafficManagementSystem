@@ -1,8 +1,11 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from django.core.exceptions import ObjectDoesNotExist
 from .models import Driver, Vehicle, Plate, JunctionsLog
 from .recognition_function import PlateRecognition
+from datetime import datetime
+import json
 
 
 
@@ -73,3 +76,41 @@ def register_vehicle(request):
             return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
         
         return Response('Vehicle registered successfully', status=status.HTTP_201_CREATED)
+
+@api_view(['GET'])
+def process_junctions_log(request, formatted_date):
+    file_name = f"junctions_log_{formatted_date}.json"
+    file_path = f"/Users/charton/Git/TrafficTest/Traffic_Management/junctions_log_{formatted_date}.json"
+
+    try:
+        with open(file_path, 'r') as json_file:
+            junctions_log_data = json.load(json_file)
+    except FileNotFoundError:
+        return Response(f"File '{file_path}' not found", status=404)
+
+    car_count_per_period = {}
+
+    for entry in junctions_log_data:
+        number_plate = entry['numberPlate']
+        dateTime = datetime.strptime(entry['dateTime'], "%Y-%m-%d")
+        period = entry['period']
+
+        try:
+            plate_instance = Plate.objects.get(numberPlate=number_plate)
+            status = 'Registered'
+        except ObjectDoesNotExist:
+            plate_instance = None
+            status = 'Unknown'
+
+        log_entry = JunctionsLog.objects.create(
+            numberPlate=number_plate,
+            dateTime=dateTime,
+            period=period,
+            location=entry['location'],
+            event=entry['event'],
+            status=status
+        )
+
+        car_count_per_period[period] = car_count_per_period.get(period, 0) + 1
+
+    return Response(car_count_per_period, status=200)
