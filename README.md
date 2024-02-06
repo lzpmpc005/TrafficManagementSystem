@@ -53,7 +53,7 @@ This project use Django, along with MySQL as the database backend to create a we
     pip install -r requirements.txt
     ```
 4. If you don't want to install all the libraries the same as the contributors, here are some core libraries:
-    Copy, paste and cover them in requirements.txt and repeat step 3
+    Copy, paste and cover them in requirements.txt and repeat step 3, but error may happen due to system differences
 
     ```
     Django==4.2.6
@@ -73,7 +73,7 @@ This project use Django, along with MySQL as the database backend to create a we
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'Traffic_Management',
+            'NAME': 'your_mysql_database',
             'USER': 'your_mysql_username',
             'PASSWORD': 'your_mysql_password',
             'HOST': 'localhost', # modify it if yours are different
