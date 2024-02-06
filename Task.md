@@ -1,5 +1,13 @@
-## 2nd Week Plan
+## 3nd Week Plan
 
+### Congestion Prediction
+* [ ] Implementing a feature to analyse the number of vehicles passing through city junctions at different time
+* [ ] Identifying areas prone to congestion based on the traffic flow data
+* [ ] Using data visualization tools to represent traffic flow and congestion patterns
+* [ ] Implement algorithms to predict congestion times and suggest alternative routes to drivers by
+emailing them when a congestion is detected
+
+## 2nd Week Plan
 
 ### Violation Detecting Function
 

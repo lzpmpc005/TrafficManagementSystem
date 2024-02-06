@@ -14,7 +14,7 @@ class Driver(models.Model):
     driverID = models.AutoField(primary_key=True)
     driverName = models.CharField(max_length=100)
     driverEmail = models.EmailField(max_length=254)
-    driverPhone = models.PositiveIntegerField()
+    driverPhone = models.BigIntegerField()
 
     def __str__(self):
         return f"Driver ID: {self.driverID}, Driver Name: {self.driverName}"
@@ -32,9 +32,56 @@ class JunctionsLog(models.Model):
     numberPlate = models.CharField(max_length=20)
     dateTime = models.DateTimeField()
     period = models.CharField(max_length=100)
-    location = models.CharField(max_length=100)
-    event = models.CharField(max_length=100)
-    status = models.CharField(max_length=100)
+    location = models.CharField(max_length=255)
+    speed = models.IntegerField(default=0)
+    hitSuspicion = models.BooleanField(default=False)
+    redlightSuspicion = models.BooleanField(default=False)
+    beltStatus = models.BooleanField(default=False)
+    phoneStatus = models.BooleanField(default=False)
+    registerStatus = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Log ID: {self.logID}, Plate: {self.numberPlate}"
+
+class Violation(models.Model):
+    logID = models.AutoField(primary_key=True)
+    violationType = models.CharField(max_length=255)
+    fineAmount = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"Log ID: {self.logID}, Violation Type: {self.violationType}, Fine Amount: {self.fineAmount}"
+
+
+class ViolationLog(models.Model):
+    logID = models.AutoField(primary_key=True)
+    numberPlate = models.CharField(max_length=255)
+    dateTime = models.DateTimeField()
+    location = models.CharField(max_length=255)
+    violationType = models.ForeignKey(Violation, on_delete=models.SET_DEFAULT, default=None)
+
+    def __str__(self):
+        return f"Log ID: {self.logID}, Plate: {self.numberPlate}, Date Time: {self.dateTime}, Location: {self.location}, Violation Type: {self.violationType}"
+
+class FineLog(models.Model):
+    logID = models.AutoField(primary_key=True)
+    numberPlate = models.CharField(max_length=255)
+    driverID = models.BigIntegerField()
+    driverName = models.CharField(max_length=255)
+    dateTime = models.DateTimeField()
+    location = models.CharField(max_length=255)
+    violationType = models.ForeignKey(Violation, on_delete=models.SET_DEFAULT, default=None)
+    fineAmount = models.IntegerField(default=0)
+    closedStatus = models.BooleanField()
+    
+    def __str__(self):
+        return f"Log ID: {self.logID}, Plate: {self.numberPlate}, Driver ID: {self.driverID}, Driver Name: {self.driverName}, Date Time: {self.dateTime}, Location: {self.location}, Violation Type: {self.violationType}, Fine Amount: {self.fineAmount}, Closed Status: {self.closedStatus}"
+    
+class EmailLog(models.Model):
+    logID = models.AutoField(primary_key=True)
+    driverEmail = models.EmailField(max_length=255)
+    fineLogID = models.ForeignKey(FineLog, on_delete=models.SET_DEFAULT, default=None)
+    dateTime = models.CharField(max_length=255)
+    sentStatus = models.BooleanField()
+    
+    def __str__(self):
+        return f"Log ID: {self.logID}, Driver Email: {self.driverEmail}, Fine Log ID: {self.fineLogID}, Date Time: {self.dateTime}, Sent Status: {self.sentStatus}"

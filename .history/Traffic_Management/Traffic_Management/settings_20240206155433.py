@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "User_Service",
-    "Notification",
 ]
 
 MIDDLEWARE = [
@@ -86,7 +85,7 @@ WSGI_APPLICATION = "Traffic_Management.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db',
+        'NAME': 'db', # or the dbname where your MySQL server is running
         'USER': 'root',
         'PASSWORD': 'Funchy0312',
         'HOST': 'localhost',  # or the hostname where your MySQL server is running
