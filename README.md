@@ -117,4 +117,3 @@ This project use Django, along with MySQL as the database backend to create a we
 ## Contributing
 
 Contributions are welcome!
->>>>>>> Stashed changes
