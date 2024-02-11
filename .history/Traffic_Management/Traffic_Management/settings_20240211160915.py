@@ -21,7 +21,7 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'taoleipzig@gmail.com'
-EMAIL_HOST_PASSWORD = 'mpov dtvw wqrc wtth'
+EMAIL_HOST_PASSWORD = 'sms243W12024'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/

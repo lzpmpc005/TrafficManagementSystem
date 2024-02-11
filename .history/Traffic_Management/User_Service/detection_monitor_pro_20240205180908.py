@@ -32,24 +32,24 @@ def generate_junction_logs():
         else:
             number_records = random.randint(5, 10)
 
-        for _ in range (number_records):
-            if random.random() <= 0.8:
-                number_plate = random.choice(plates_from_file)['number_plate']
-            else:
-                number_plate = random.choice(plates_random)['number_plate']
+            for _ in range (number_records):
+                if random.random() <= 0.8:
+                    number_plate = random.choice(plates_from_file)['number_plate']
+                else:
+                    number_plate = random.choice(plates_random)['number_plate']
 
-            log = {
-                'numberPlate': number_plate,
-                'dateTime': formatted_date,
-                'period': f"{hour}:00 - {hour+1}:00",
-                'location': random_location,
-                'speed': random.randint(0, 200),
-                'hitSuspicion': random.choice([True, False]),
-                'redlightSuspicion': random.choice([True, False]),
-                'beltStatus': random.choice([True, False]),
-                'phoneStatus': random.choice([True, False])
-            }
-            junctions_log.append(log)
+                log = {
+                    'numberPlate': number_plate,
+                    'dateTime': formatted_date,
+                    'period': f"{hour}:00 - {hour+1}:00",
+                    'location': random_location,
+                    'speed': random.randint(0, 200),
+                    'hitSuspicion': random.choice([True, False]),
+                    'redlightSuspicion': random.choice([True, False]),
+                    'beltStatus': random.choice([True, False]),
+                    'phoneStatus': random.choice([True, False])
+                }
+                junctions_log.append(log)
 
     return junctions_log, formatted_date
 

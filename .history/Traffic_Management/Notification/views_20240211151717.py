@@ -25,23 +25,20 @@ def send_email(request):
     else:
         return JsonResponse({'message': 'Invalid request'})
 
-@api_view(['GET'])
-def send_congestion_warning(request, formatted_date):
+@api_view
+def send_congestion_warning(request, datetime):
     if request.method == 'GET':
         try:
             target_junction = "test_junction"
             
-            #only send to myself
-            drivers = Driver.objects.filter(driverName="Charton")
+            drivers = Driver.objects.all()
             
             subject = "Congestion Warning"
-            message = f"Congestion warning for {formatted_date}: Heavy traffic on {target_junction} expected. Please plan your route accordingly."
+            message = f"Congestion warning for {datetime}: Heavy traffic on {target_junction} expected. Please plan your route accordingly."
 
             for driver in drivers:
                 recipient = driver.driverEmail
                 send_email_with_smtp(subject, message, recipient)
-            return Response('Send successfully', status=status.HTTP_200_OK)
-        
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     else:

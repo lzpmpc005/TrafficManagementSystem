@@ -11,7 +11,6 @@ def send_email_with_smtp(subject, message, recipient):
             message,
             settings.EMAIL_HOST_USER,
             recipient,
-            fail_silently=False
         )
     except Exception as e:
         print(e)

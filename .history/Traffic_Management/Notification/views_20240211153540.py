@@ -31,8 +31,7 @@ def send_congestion_warning(request, formatted_date):
         try:
             target_junction = "test_junction"
             
-            #only send to myself
-            drivers = Driver.objects.filter(driverName="Charton")
+            drivers = Driver.objects.all()
             
             subject = "Congestion Warning"
             message = f"Congestion warning for {formatted_date}: Heavy traffic on {target_junction} expected. Please plan your route accordingly."
