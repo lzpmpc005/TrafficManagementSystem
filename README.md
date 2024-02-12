@@ -10,7 +10,6 @@ This project use Django, along with MySQL as the database backend to create a we
 
 * **User Service**: Provides user authentication and management functionalities.
 * **Notifications**: Allows sending notifications to users about traffic-related events.
-* **REST API**: Uses Django Rest Framework to create a RESTful API for interacting with the application.
 * **Database Backend**: Uses MySQL for storing application data.
 
 ## Requirements
@@ -93,14 +92,14 @@ This project use Django, along with MySQL as the database backend to create a we
     python manage.py runserver
     ```
 
-## Usage
+## Notes for Usage
 
 1. (highly recommanded!) Import SQL script provided (see file in repository) for initial data
 
     if you don't know how to import SQL script please search according to the database application you use
 2. Generate data by in-built functions
 
-    (to be built)
+    (data to be added soon)
 3. Use the provided REST API endpoints for interacting with the application programmatically.
 4. (very important!) When use built-in functions read from external resources otherthan database, check the file_path variables! 
 5. (highly recommanded!) Use Postman to test REST API endpoints
@@ -113,6 +112,43 @@ This project use Django, along with MySQL as the database backend to create a we
     if you don't know how to use Terminal search on Google for "how to use terminal to send request" or something alike
 
     * example 1 (to be built)
+  
+## Senarios and usages 
+(still building)
+1. Implementing Vehicle Registration and License Plate Recognition
+   1.1 Register
+   1.2 Recognize
+2. Monitoring Traffic Violations and Issuing Fines
+   2.1 Detect violation
+   2.2 Issue fines
+3. Analysing Traffic Flow and Managing Congestion
+   3.1 Analyse flow
+      3.1.1 implement Traffic_Management/User_Service/detection_monitor_streets_v2.py
+      3.1.2 implement Traffic_Management/User_Service/predict_traffictime_nextday_v2.py
+      3.1.3 the 'detection_monitor_streets' will produce simulated data and 'predict_traffictime_nextday' will analyse it
+      3.1.4 the output will be a conclusion about busiest hour and a list of total average flow per hour
+   3.2 Notify drivers
+      3.2.1 go to Traffic_Management/Notification/flow_visualization.py
+         3.2.1.1 change the 'folder_name' according to your senarios (or set default if using the given data package)
+         3.2.1.2 implement Traffic_Management/Notification/flow_visualization.py
+      3.2.2 the 'flow_visualization' will plot a graphic according to the output of 'predict_traffictime_nextday'
+      3.2.3 run the server for the following instructions
+         3.2.3.1 open terminal or postman (see 'Notes for Usage' about how to use)
+         3.2.3.2 to use default URL: http://localhost:8000/notification/send_congestion_warning/2024-02-06/London/
+         3.2.3.3 to customize URL according your senario here is the template: http://localhost:8000/notification/send_congestion_warning/<str:formatted_date>/<str:fake_city>/
+         3.2.3.4 go to the main dialect and go to setting.py
+            3.2.3.4.1 search for EMAIL_HOST and modify it according to yours (default is Gmail)
+            3.2.3.4.2 see tutorials like this: https://stackoverflow.com/questions/6367014/how-to-send-email-via-django
+            3.2.3.4.3 the setting of EMAIL_HOST is very trick according to what service you use
+            3.2.3.4.4 to modify the receiver
+               3.2.3.4.4.1 open your database and the table Driver
+               3.2.3.4.4.2 add yourself as a driver and make should the email address is valid
+               3.2.3.4.4.3 go to 'Notification/User_Service'
+               3.2.3.4.4.4 find 'drivers = Driver.objects.filter(driverName="Charton")'
+               3.2.3.4.4.5 replace 'Charton' to your name (should be same as the name you input in database the 1st step)
+         3.2.3.4 use the method GET to test
+4. Prioritising Emergency Vehicles and Clearing Routes
+         
 
 ## Contributing
 
