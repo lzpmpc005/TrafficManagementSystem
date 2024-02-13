@@ -29,5 +29,5 @@ def visualize_flow(folder_name):
 
     return image_file
 
-# folder_name = '2024-02-06_London_junction_logs'
-# function = visualize_flow(folder_name)
+folder_name = '2024-02-06_London_junction_logs'
+function = visualize_flow(folder_name)

@@ -1,3 +1,14 @@
+## 4nd Week Plan
+
+## Emergency detection and notification
+* [ ] Implementing scripts for different emergency scenarios
+* [ ] Implementing a real-time simulator that can read from the scripts and replay
+* [ ] When emergency situation triggered, notify the drivers
+
+* [ ] Make shall the ambulance and othe special type vehicle should not be fined
+
+* [ ] Try find a arithmetic to figure out the nearest street for reference
+
 ## 3nd Week Plan
 
 ### Congestion Prediction

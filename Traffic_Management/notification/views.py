@@ -41,7 +41,7 @@ def send_congestion_warning(request, formatted_date, fake_city):
 
             result, conclusion = predict_next_day_traffic(folder_name)
             # image_file = visualize_flow(folder_name)
-            message = conclusion
+            message = f"{conclusion}\nPlease schedule your department."
             
             for driver in drivers:
                 recipient = driver.driverEmail

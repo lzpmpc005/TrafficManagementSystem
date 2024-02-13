@@ -1,2 +1,6 @@
 *.pyc
 *.pyo
+*.history
+fake_plates_20240205_161657.json/
+junctions_log_2024-06-28.json/
+2024-02-06_London_junction_logs/
