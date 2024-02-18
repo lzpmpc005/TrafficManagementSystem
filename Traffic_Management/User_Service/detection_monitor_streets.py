@@ -1,8 +1,8 @@
 import json
 import random
 from faker import Faker
-from datetime import datetime
-from fake_plate import generate_fake_plates, read_fake_plates
+from datetime import datetime, timedelta
+from .fake_plate import generate_fake_plates, save_fake_plates, read_fake_plates
 
 
 fake = Faker()
@@ -11,11 +11,11 @@ fake_street_names = [
     # "Baker Street",
     # "King's Cross",
     # "Euston",
-    # "Farringdon",
-    # "Vauxhall",
-    # "Green Park",
-    "London Bridge",
-    # "Tottenham Court Road",
+    "Farringdon",
+    "Vauxhall",
+    "Green_Park",
+    "London_Bridge",
+    "Tottenham_Court_Road",
 ]
 
 fake_cities = [
@@ -28,11 +28,11 @@ def generate_junction_logs():
     all_days = []
 
     for j in range(5):
-        for i in range(5):
-            formatted_date = f'2024-02-0{j+1}_{i+1}'
+        for street in fake_street_names:
+            file_date = f'2024-02-0{j+1}_{street}'
+            formatted_date = f'2024-02-0{j+1}'
 
-            road = fake.street_name()
-            random_location = f"{random.choice(fake_street_names)}, {random.choice(fake_cities)}"
+            random_location = f"{street}, {random.choice(fake_cities)}"
 
             junctions_log = []
 
@@ -40,10 +40,9 @@ def generate_junction_logs():
             evening_peak_hours = [16, 17, 18, 19, 20]
 
             plates_random = generate_fake_plates()
-            plates_from_file = read_fake_plates("fake_plates_20240205_161657.json")
+            plates_from_file = read_fake_plates("fake_plates_20240208_204349.json")
 
             for hour in range(24):
-
                 if hour in morning_peak_hours or hour in evening_peak_hours:
                     number_records = random.randint(20, 30)
                 else:
@@ -57,7 +56,7 @@ def generate_junction_logs():
 
                         log = {
                             "numberPlate": number_plate,
-                            "dateTime": formatted_date[:-2],
+                            "dateTime": formatted_date,
                             "period": f"{hour}:00 - {hour+1}:00",
                             "location": random_location,
                             "speed": random.randint(0, 200),
@@ -65,15 +64,15 @@ def generate_junction_logs():
                             "redlightSuspicion": random.choice([True, False]),
                             "beltStatus": random.choice([True, False]),
                             "phoneStatus": random.choice([True, False]),
-
                         }
                         
                         junctions_log.append(log)
-                        file_name = f"junctions_log_{formatted_date}.json"
+                        file_name = f"junctions_log_{file_date}.json"
                         with open(file_name, "w") as json_file:
                             json.dump(junctions_log, json_file)
 
 
 
-# if __name__ == "__main__":
-#     all_junctions = generate_junction_logs()
+if __name__ == "__main__":
+    all_junctions = generate_junction_logs()
+
