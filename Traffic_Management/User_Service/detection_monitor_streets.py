@@ -2,7 +2,7 @@ import json
 import random
 from faker import Faker
 from datetime import datetime, timedelta
-from .fake_plate import generate_fake_plates, save_fake_plates, read_fake_plates
+from fake_plate import generate_fake_plates, save_fake_plates, read_fake_plates
 
 
 fake = Faker()
@@ -40,7 +40,7 @@ def generate_junction_logs():
             evening_peak_hours = [16, 17, 18, 19, 20]
 
             plates_random = generate_fake_plates()
-            plates_from_file = read_fake_plates("fake_plates_20240208_204349.json")
+            plates_from_file = read_fake_plates("fake_plates_20240217_132316.json")
 
             for hour in range(24):
                 if hour in morning_peak_hours or hour in evening_peak_hours:

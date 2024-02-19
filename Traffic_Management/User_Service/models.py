@@ -85,3 +85,12 @@ class EmailLog(models.Model):
     
     def __str__(self):
         return f"Log ID: {self.logID}, Driver Email: {self.driverEmail}, Fine Log ID: {self.fineLogID}, Date Time: {self.dateTime}, Sent Status: {self.sentStatus}"
+    
+class Junction(models.Model):
+    junctionID = models.AutoField(primary_key=True)
+    junctionName = models.CharField(max_length=255)
+    latitude = models.IntegerField(default=0)
+    longitude = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"Junction ID: {self.junctionID}, Junction Name: {self.junctionName}"
