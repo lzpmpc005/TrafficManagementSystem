@@ -26,3 +26,6 @@ def read_fake_plates(file_name):
     with open(file_name, 'r') as json_file:
         plate_data = json.load(json_file)
     return plate_data
+
+# fake_plates = generate_fake_plates()
+# save_fake_plates(fake_plates)
